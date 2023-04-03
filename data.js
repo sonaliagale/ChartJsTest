@@ -26,7 +26,7 @@ let chartData =
             ]
         },
         {
-            "label": "Mettings",
+            "label": "Meeting",
             totals: [
                 {
                     date: "2023-04-04T00:00:00.000+08:00",
@@ -133,7 +133,7 @@ let chartData2 =
             ]
         },
         {
-            "label": "Mettings",
+            "label": "Meeting",
             totals: [
                 {
                     date: "2023-11-04T00:00:00.000+08:00",
