@@ -1,0 +1,89 @@
+.content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chartContent {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.itemMaker {
+    height: 12px;
+    width: 12px;
+    margin-right: 8px;
+}
+
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#legend {
+    padding-left: 10px;
+    padding-bottom: 20px;
+    display: grid !important;
+    max-width: 100%;
+    grid-template-columns: repeat(2, 0.13fr);
+    /* grid-row-gap: 0.5em; */
+}
+
+#legend li {
+    cursor: pointer;
+    display: flex;
+    padding: 5px 0px 5px 0;
+}
+
+#legend li span {
+    white-space: nowrap;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+
+#chartjs-tooltip {
+    cursor: pointer;
+    background: #fff;
+    border-radius: 4px;
+    opacity: 1;
+    pointer-events: auto;
+    position: absolute;
+    transform: translate(-50%, 0);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    transition: 'all .1s ease';
+    margin-top: 30px;
+}
+
+#tooltip-title {
+    font-weight: 700;
+    padding-bottom: 8px;
+}
+
+.tooltipColorBox {
+    border-width: 2px;
+    margin-right: 10px;
+    height: 10;
+    width: 4;
+    display: inline-block;
+}
+
+.tooltip-link {
+    cursor: pointer;
+    text-align: center;
+    margin-top: 10px;
+    padding-Top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px solid gray;
+}
+
+.more-link {
+    text-decoration: none;
+}
+
+.tooltip-ui li {
+    margin: 2px;
+}

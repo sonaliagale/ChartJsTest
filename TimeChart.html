@@ -1,0 +1,43 @@
+<div style="height:50%;width:80%;margin-left:5%;margin-right:5%">
+    <div class="content">
+        <h1>Engagement Timeline</h1>
+        <div>
+            <span id="selectedValue">Last days</span>
+            <select class="selectDays" id="days" onchange="selectDays()">
+                <option value="90">90</option>
+                <option value="100">100</option>
+                <option value="150">150</option>
+                <option value="200">200</option>
+            </select>
+            <span id="selectedValue">Select Unit</span>
+            <select class="selectDays" id="unit" onchange="selectUnit()">
+                <option value="day">Day</option>
+                <option value="month">Month</option>
+                <!-- <option value="week">Week</option> -->
+                <!-- <option value="year">Year</option> -->
+                <!-- <option value="hour">Hour</option>
+                <option value="minute">Minute</option>
+                <option value="second">Second</option> -->
+            </select>
+            <span id="selectedValue">Select scale Type</span>
+            <select class="selectDays" id="type" onchange="selectType()">
+                <option value="time">time</option>
+                <option value="timeseries">timeseries</option>
+
+            </select>
+        </div>
+    </div>
+    <div class="chartContent">
+        <canvas id="myChart" style="height:100%;width:100%;"></canvas>
+        <div id="legend"></div>
+    </div>
+</div>
+
+<script src="./constant.js">  </script>
+<link rel="stylesheet" href="./TimeChart.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
+<script src="./data.js">  </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.30.1/date_fns.js"></script>
+<script
+    src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<script src="./TimeChart.js">  </script>
