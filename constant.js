@@ -1,22 +1,25 @@
-const messageLabel = {
+const MESSAGE_LABLES = {
     "SentEmails": " mail to ",
     "Views": " viewed ",
     "Comments": " commented on ",
     "Meeting": " meeting scheduled "
 }
 
-const backgroundColor = {
-    // "SentEmails": "#D0D0D0",
-    // "Views" : "#ccffdd",
-    // "Comments" : "#ADD8E6",
-    // "Meeting" : "#ff9999"
+const BACKGROUND_COLOR = {
+    "SentEmails": "#CFD4DA",
+    "Views" : "#FCD9E3",
+    "Comments" : "#D9E6F7",
+    "Meeting" : "#E6F0E8"
 }
 
-const borderColor = {
-    // "SentEmails":"#a6a6a6",
-    // "Views" : "#80ffaa",
-    // "Comments" : "#87CEFA",
-    // "Meeting" : "#ff6666"
+const BORDER_COLOR = {
+    "SentEmails": "#535B64",
+    "Views" : "#EA0047",
+    "Comments" : "#005BC7",
+    "Meeting" : "#006C18"
 }
 
-const barThickness = 18;
+const BAR_THICKNESS = 18;
+const TOOLTIP_LINK = "http://google.com";
+const LINK_ICON = "./external-link.svg";
+const TOOLTIP_DATE_FORMAT = "MMM dd, yyyy";

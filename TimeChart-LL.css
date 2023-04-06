@@ -3,6 +3,8 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 21px;
+
 }
 
 .chartContent {
@@ -11,12 +13,35 @@
     align-items: flex-start;
 }
 
+.engagement-title {
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 27px;
+    color: #080707;
+}
+
+.legendLabel {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    color: #535B64;
+    line-height: 1;
+}
+
+.legendItem {
+    align-items: center;
+}
+
 .itemMaker {
     height: 12px;
     width: 12px;
     margin-right: 8px;
+    border-radius: 4px;
+    transform: matrix(1, 0, 0, -1, 0, 0);
 }
-
 
 ul {
     list-style-type: none;
@@ -47,6 +72,4 @@ ul {
 
 #legend li span {
     white-space: nowrap;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
 }

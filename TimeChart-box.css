@@ -3,20 +3,47 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 21px;
+}
+
+.engagement-title {
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 27px;
+    color: #080707;
+    margin-bottom: 24px;
 }
 
 .chartContent {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
+    width: 88%;
 }
 
 .itemMaker {
     height: 12px;
     width: 12px;
     margin-right: 8px;
+    border-radius: 4px;
+    transform: matrix(1, 0, 0, -1, 0, 0);
 }
 
+.legendLabel {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+    color: #535B64;
+}
+
+.legendItem {
+    align-items: center;
+    width: 120px;
+}
 
 ul {
     list-style-type: none;
@@ -24,28 +51,7 @@ ul {
     padding: 0;
 }
 
-#legend {
-    padding-left: 10px;
-    padding-bottom: 20px;
-    display: grid !important;
-    max-width: 100%;
-    grid-template-columns: repeat(2, 0.13fr);
-    /* grid-row-gap: 0.5em; */
-}
-
-#legend li {
-    cursor: pointer;
-    display: flex;
-    padding: 5px 0px 5px 0;
-}
-
-#legend li span {
-    white-space: nowrap;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
-}
-
-#chartjs-tooltip {
+.chartjs-tooltip {
     cursor: pointer;
     background: #fff;
     border-radius: 4px;
@@ -56,6 +62,22 @@ ul {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     transition: 'all .1s ease';
     margin-top: 30px;
+}
+
+.tooltipTextContent {
+    display: grid;
+    /* max-height: 266px;
+    overflow-y: auto; */
+}
+
+.engg-tooltip-title {
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 27px;
+    color: #343A40;
+    padding: 16px 0 0 16px;
 }
 
 #tooltip-title {
@@ -74,16 +96,127 @@ ul {
 .tooltip-link {
     cursor: pointer;
     text-align: center;
-    margin-top: 10px;
-    padding-Top: 10px;
-    padding-bottom: 10px;
+    padding-Top: 12px;
+    padding-bottom: 12px;
     border-top: 1px solid gray;
 }
 
-.more-link {
+.seeMoreLink {
     text-decoration: none;
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    color: #006DCC;
+}
+
+.tooltip-ui {
+    display: grid;
+    padding: 16px 27px 27px 16px;
 }
 
 .tooltip-ui li {
-    margin: 2px;
+    margin: 5px 0 5px 0;
+}
+
+.external-link-icon {
+    height: 14px;
+    width: 14px;
+}
+
+#legend {
+    padding-left: 10px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: unset;
+    height: fit-content;
+    align-items: flex-start;
+    justify-content: start;
+}
+
+#legend li {
+    cursor: pointer;
+    display: flex;
+    padding: 5px 5px 5px 5px;
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+
+.chartjs-tooltip {
+    width: 300px;
+}
+
+.tooltipItem {
+    display: flex;
+    align-items: baseline;
+    margin: 10px 0 10px 0;
+}
+
+.tooltip-time {
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 21px;
+    color: #343A40;
+}
+
+.tooltip-text {
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #343A40;
+}
+
+.tooltip-text-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+@media only screen and (max-width: 720px) {
+    #legend {
+        height: auto;
+        width: 340px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: baseline;
+    }
+
+    #legend li {
+        width: 140px;
+    }
+
+    .chartContent {
+        width: 100%;
+    }
+
+    .chart-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    .chartjs-tooltip {
+        width: 150px;
+    }
+
+    .legendItem {
+        border-bottom: 0 !important;
+        padding: 0 !important;
+    }
+
+    .tooltipTextContent {
+        height: 150px;
+        overflow-y: scroll !important;
+    }
+
 }

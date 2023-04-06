@@ -1,33 +1,51 @@
-function formateData(chartData) {
+function formatData(chartData) {
     chartData.forEach(function (item) {
         const result = item.totals.map(a => ({ x: a.date, y: a.count }))
         item.totals = result;
     });
     return chartData;
 }
-function getDataSet(formatData) {
-    const data = formateData(formatData)
-    const result = [];
+function getDataSet(dataset) {
+    const data = formatData(dataset)
+    const chartData = createBarConfiguration(data)
+    return chartData;
+}
+
+function createBarConfiguration(data) {
+    const configData = [];
     for (let i = 0; i < data.length; i++) {
         const details = data[i];
         const chartDetails = {
             label: details.label,
-            //barPercentage: 1,
-            barThickness: barThickness,
-            //categoryPercentage: 1,
-            backgroundColor:  backgroundColor && backgroundColor[details.label.replace(' ', '')],
-            borderColor:  borderColor && borderColor[details.label.replace(' ', '')],
-            borderWidth: 1,
+            //  barPercentage: 1,
+            barThickness: BAR_THICKNESS,
+            borderSkipped: 'middle',
+            // categoryPercentage: 0.4,
+            backgroundColor: BACKGROUND_COLOR[details.label.replace(' ', '')],
+            borderColor: BORDER_COLOR[details.label.replace(' ', '')],
+            borderWidth: {
+                top: 1,
+                right: 1,
+                left: 1,
+                bottom: 0
+            },
             data: details.totals,
         }
-        result.push(chartDetails);
+        configData.push(chartDetails);
     }
-    return result;
+    return configData;
+}
+function createLegendBullet(item) {
+    const legendBullet = document.createElement('span');//box
+    legendBullet.style.backgroundColor = item.fillStyle;
+    legendBullet.style.border = '1px solid ' + item.strokeStyle;
+    legendBullet.classList.add("itemMaker");
+    return legendBullet;
 }
 
 function generateCustomLegend(timeChart) {
     //Generate custom legend
-    const legendItems = timeChart.legend.legendItems;
+    const legendItems = timeChart?.legend?.legendItems;
     const legendContainer = document.getElementById("legend");
     legendContainer.innerHTML = '';
 
@@ -35,20 +53,40 @@ function generateCustomLegend(timeChart) {
     for (let i = 0; i < legendItems.length; i++) {
         const item = legendItems[i];
         const text = document.createTextNode(item.text);
-        const color = item.fillStyle;
         const listItem = document.createElement('li');
-        const itemMarker = document.createElement('span');//box
-        const itemText = document.createElement('span');//text
-        listItem.appendChild(itemMarker);
+        listItem.className = "legendItem";
+        const legendBullet = createLegendBullet(item);
+        const itemText = document.createElement('span');
+        itemText.className = "legendLabel";
+        listItem.appendChild(legendBullet);
         listItem.appendChild(itemText);
-        itemMarker.style.backgroundColor = color;
-        itemMarker.style.border = '1.5px solid ' + color;
-
-        itemMarker.classList.add("itemMaker");
         itemText.appendChild(text);
         legendContainer.appendChild(listItem);
     }
+}
 
+function convertDateFormat(str) {
+    const dateObj = new Date(str);
+    const formattedDate = dateObj.toLocaleString([], {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+    });
+    return formattedDate;
+}
+
+function getXaxisLabels(strDate) {
+    const dateObj = new Date(strDate);
+    const formattedDate = dateObj.toLocaleString([], {
+        month: 'short',
+        day: 'numeric'
+    });
+    if (dateObj.getDate() === 15) {
+        return dateObj.getDate();
+    }
+    if (dateObj.getDate() === 1) {
+        return formattedDate;
+    }
 }
 
 const barChartOptions = {
@@ -63,38 +101,21 @@ const barChartOptions = {
         }
     },
     plugins: {
-        tooltip: {
-            callbacks: {
-                title: function (context) {
-                    const d = new Date(context[0].raw.x);
-                    const formattedDate = d.toLocaleString([], {
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric'
-                    });
-                    return formattedDate;
-                }
-            }
-        },
         legend: {
             display: false,
-            position: "top",  //top/bottom/left/right
-            align: "start",  //start/center/end
-            maxWidth: 10,
-            maxRows: 2,
             labels: {
-                boxWidth: 15,
                 generateLabels: (chart) => {
                     return Chart.defaults.plugins.legend.labels.generateLabels(chart).map(function (label) {
                         let dataset = chart.data.datasets[label.datasetIndex];
                         let total = 0;
+
                         for (let j = 0; j < dataset.data.length; j++)
                             total += dataset.data[j].y;
                         label.text = dataset.label + '-' + total;
                         return label;
                     });
                 }
-            },
+            }
         },
 
     },
@@ -105,30 +126,20 @@ const barChartOptions = {
     scales: {
         x: {
             ticks: {
-                callback: function (val, index) {
-                    const d = new Date(val);
-                    const formattedDate = d.toLocaleString([], {
-                        //year: 'numeric',
-                        month: 'short',
-                        day: 'numeric'
-                    });
-                    if (d.getDate() === 15) {
-                        return d.getDate();
-                    }
-                    if (d.getDate() === 1) {
-                        return formattedDate;
-                    }
-
+                fontFamily: "Segoe UI",
+                fontSize: 12,
+                fontWeight: 400,
+                callback: function (val) {
+                    return getXaxisLabels(val)
                 },
-
             },
             type: 'time',
             time: {
                 unit: 'day',
-                stepSize: 200,
                 displayFormats: {
-                    'day': 'MMM dd',
-                }
+                    'day': "MMM dd",
+                },
+                tooltipFormat: TOOLTIP_DATE_FORMAT
             },
             stacked: true,
             grid: {
@@ -143,17 +154,11 @@ const barChartOptions = {
             }
         },
     },
-    title: {
-        display: true,
-        text: "Chart.js Bar Chart"
-    }
 }
-
 
 const barChartData = {
     datasets: getDataSet(chartData.aggregates)
 };
-
 
 const ctx = document.getElementById('myChart');
 const myChart = new Chart(ctx, {
@@ -162,8 +167,6 @@ const myChart = new Chart(ctx, {
     options: barChartOptions
 });
 generateCustomLegend(myChart);
-
-
 
 function selectDays() {
     const selectedDayCount = document.querySelector('#days')
